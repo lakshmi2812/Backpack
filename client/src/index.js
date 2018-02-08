@@ -12,7 +12,7 @@ import thunk from "redux-thunk";
 
 import { currentUser } from "./reducers";
 
-let store = createStore(currentUser, applyMiddleware(logger, thunk));
+let store = createStore(currentUser, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>

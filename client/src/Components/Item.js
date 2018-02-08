@@ -8,17 +8,16 @@ configure({ adapter: new Adapter() });
 
 const Item = ({ item }) => {
   let meta = !item.meta ? (
-
     <div>
       <p>Invalid Item</p>
     </div>
-  ) : item.meta.data.ogType === 'string' ? (
+  ) : item.meta.data.ogType === "string" ? (
     <div>
       <p>{item.link}</p>
     </div>
-  ) : item.meta.data.ogType === 'pic' ? (
+  ) : item.meta.data.ogType === "pic" ? (
     <img width="500px" height="300px" src={item.link} />
-  ) : item.meta.data.ogType === 'article' ? (
+  ) : item.meta.data.ogType === "article" ? (
     <div>
       <h3>{item.meta.data.ogSiteName}</h3>
       <a href={item.meta.data.ogUrl}>
@@ -29,7 +28,7 @@ const Item = ({ item }) => {
         <img src={item.meta.data.ogImage.url} width="500px" height="auto" />
       </a>
     </div>
-  ) : item.meta.data.ogType === 'website' ? (
+  ) : item.meta.data.ogType === "website" ? (
     <div>
       <a href={item.meta.data.ogUrl}>
         <h2>{item.meta.data.ogTitle}</h2>

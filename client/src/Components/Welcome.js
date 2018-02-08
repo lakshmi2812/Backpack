@@ -1,10 +1,7 @@
 import React, { PureComponent } from "react";
 
 import Header from "./Header";
-import {
-  LoginContainer,
-  SignUpContainer
-} from "../Containers";
+import { LoginContainer, SignUpContainer } from "../Containers";
 import { Button, Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import FacebookContainer from "../Containers/FacebookContainer";
@@ -23,13 +20,13 @@ class Welcome extends PureComponent {
     this.setState({
       modalLogin: !this.state.modalLogin
     });
-  }
+  };
 
   toggleSignUp = () => {
     this.setState({
       modalSignUp: !this.state.modalSignUp
     });
-  }
+  };
 
   render() {
     return (
@@ -72,12 +69,12 @@ class Welcome extends PureComponent {
                     </Link>
                   </Col>
                   <Col>
-                    <Button
-                      onclick="chrome.webstore.install()"
+                    {/* <Button
+                      onClick="chrome.webstore.install()"
                       id="install-button"
                     >
-                      Add to Chrome
-                    </Button>
+                      Add to Chrome */}
+                    {/* </Button> */}
                   </Col>
                 </Row>
               </div>

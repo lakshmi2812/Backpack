@@ -1,19 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const mongoose = require('mongoose');
-const models = require('./../models');
-const Item = mongoose.model('Item');
-const Pouch = mongoose.model('Pouch');
-const User = mongoose.model('User');
-const util = require('util');
-const itemGenerator = require('../lib/newItems');
+const mongoose = require("mongoose");
+const models = require("./../models");
+const Item = mongoose.model("Item");
+const Pouch = mongoose.model("Pouch");
+const User = mongoose.model("User");
+const util = require("util");
+const itemGenerator = require("../lib/newItems");
 
-router.get('/list/:pouchId', async (req, res, next) => {
+router.get("/list/:pouchId", async (req, res, next) => {
   try {
     let pouchId = req.params.pouchId;
     let pouch = await Pouch.findById({ _id: pouchId });
     let items = await Item.find({})
-      .where('_id')
+      .where("_id")
       .in(pouch.itemIds);
     if (!items) {
       res.send(404);
@@ -24,8 +24,12 @@ router.get('/list/:pouchId', async (req, res, next) => {
   }
 });
 
-router.get('/search', async function(req, res, next) {
+router.get("/search", async function(req, res, next) {
   try {
+    let pouch = await Pouch.findById({
+      _id: req.body.filter
+    });
+    console.log("display pouch:", pouch);
     let result = await Item.find({
       name: new RegExp(req.query.name),
       ownerId: req.session.passport.user.toString()
@@ -36,7 +40,7 @@ router.get('/search', async function(req, res, next) {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     let pouch = await Pouch.findOne({ _id: req.params.id });
     if (!pouch) {
@@ -48,7 +52,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     let { name, link } = req.body;
     let userId = req.session.passport.user;
@@ -71,7 +75,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     let pouch = await Pouch.findById(req.body.pouchId);
     pouch.itemIds = pouch.itemIds.filter(id => {
